@@ -1,0 +1,70 @@
+@use './common.scss';
+
+.home-header {
+  height: 70px;
+  width: 50%;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  .home-logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .home-bar-btns {
+    margin-left: auto;
+    display: flex;
+    .home-bar-btn {
+      text-align: center;
+      margin-right: 30px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        color: #868e96;
+      }
+    }
+  }
+}
+
+.home-section {
+  &.first {
+    height: 748px;
+    background-color: #fff0f6;
+  }
+  &.second {
+    height: 748px;
+  }
+  &.third {
+    height: 748px;
+    background-color: #e7f5ff;
+  }
+  &.fourth {
+    height: 748px;
+  }
+}
+
+.home-first-wrapper {
+  display: inline-block;
+  position: relative;
+  margin-left: 25%;
+  top: 50%;
+  transform: translateY(-50%);
+  // border: 1px solid red;
+  .home-first-title {
+    font-size: 2.6rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  .home-first-description {
+    // border: 2px solid skyblue;
+    width: 320px;
+    font-size: 1rem;
+  }
+}
+
+.home-footer {
+  height: 250px;
+  background-color: #212529;
+  color: #f9f9f9;
+}
