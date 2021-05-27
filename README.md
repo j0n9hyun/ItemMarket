@@ -6,6 +6,9 @@
 ![](https://user-images.githubusercontent.com/16969364/119623560-4387ed80-be43-11eb-90b9-7c5e5785472b.PNG)
 0일차
 
+![](https://user-images.githubusercontent.com/16969364/119771332-7e982880-bef8-11eb-8d26-7708d50883a1.png)
+
+![](https://user-images.githubusercontent.com/16969364/119771481-bef7a680-bef8-11eb-9be9-027c67f696d6.png)
 
 # Features
 
