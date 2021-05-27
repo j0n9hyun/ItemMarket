@@ -1,0 +1,21 @@
+@use './common.scss';
+
+.market-list {
+  border: 1px solid skyblue;
+  height: 800px;
+}
+
+.market-items {
+  border: 1px solid red;
+  margin: 30px auto;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  flex-wrap: wrap;
+  .market-item {
+    border: 1px solid coral;
+    margin: 10px 10px;
+    width: 100px;
+    height: 80px;
+  }
+}

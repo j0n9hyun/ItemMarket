@@ -33,6 +33,36 @@
   }
 }
 
+.start-btn {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  // margin-top: 15px;
+  margin: 15px auto 0 auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  // background-color: #2b313c;
+  border: 1px solid #2b313c;
+  transition: all 0.5s ease-in-out;
+  .start-btn-text {
+    // color: #f1f1f1;
+    color: #000;
+    font-weight: bold;
+    // &:hover {
+    //   color: #868e96;
+    // }
+  }
+  &:hover {
+    // background-color: #adb5bd;
+    .start-btn-text {
+      color: #000;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+}
+
 .home-section {
   &.first {
     height: 748px;
