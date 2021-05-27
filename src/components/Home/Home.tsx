@@ -14,7 +14,7 @@ const Home = () => {
       </Helmet>
       <header className='home-header'>
         <div className='home-logo' onClick={onClickLogo}>
-          마켓
+          쫑마켓
         </div>
         <div className='home-bar-btns'>
           <span className='home-bar-btn'>로그인</span>
