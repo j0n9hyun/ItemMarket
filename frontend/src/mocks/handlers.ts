@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { MarketList } from '../components/types/marketListType';
+import { MarketList } from '../components/types/marketTypes';
 
 // export const handlers = [
 //   rest.get(
@@ -184,32 +184,32 @@ export const handlers = [
           url: 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1616137592/noticon/mllppshbmymxfgbm1jod.gif'
           },
         {  
-          userId: 20,
-          id: 20,
+          userId: 21,
+          id: 21,
           title: '제목제목제목 제목제목 제목제목 제목',
           content: '하나 둘 셋 넷 다섯 여섯 일곱 여덟',
           price: '111111111',
           url: 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1617087611/noticon/cznt0rbw203gahpfxdmc.gif'
           },
         {  
-          userId: 21,
-          id: 21,
+          userId: 22,
+          id: 22,
           title: '냥',
           content: 'cat',
           price: '3800000',
           url: 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1603679525/noticon/hybzzqipun5hoqiabvbo.gif'
           },
         {  
-          userId: 22,
-          id: 22,
+          userId: 23,
+          id: 23,
           title: '불',
           content: 'fire',
           price: '127362173612387',
           url: 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1586270956/noticon/j2rfvvpj4rnh7vxooneo.gif'
           },
         {  
-          userId: 23,
-          id: 23,
+          userId: 24,
+          id: 24,
           title: '꿱',
           content: '꾸에엑',
           price: '1500000',

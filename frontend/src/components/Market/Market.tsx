@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../Home/Footer';
 import Header from '../Home/Header';
 import '../../static/scss/market.scss';
+import MarketItems from './MarketItems';
 const Market = () => {
   return (
     <>
@@ -10,28 +11,7 @@ const Market = () => {
         <title>쫑마켓 | 장터</title>
       </Helmet>
       <Header />
-      <section className='market-list'>
-        <div className='market-items'>
-          <article className='market-item'>
-            title <div>desc</div>
-          </article>
-          <article className='market-item'>
-            title <div>desc</div>
-          </article>
-          <article className='market-item'>
-            title <div>desc</div>
-          </article>
-          <article className='market-item'>
-            title <div>desc</div>
-          </article>
-          <article className='market-item'>
-            title <div>desc</div>
-          </article>
-          <article className='market-item'>
-            title <div>desc</div>
-          </article>
-        </div>
-      </section>
+      <MarketItems />
       <Footer />
     </>
   );

@@ -6,6 +6,7 @@
   display: flex;
   margin: 0 auto;
   align-items: center;
+
   .home-logo {
     font-size: 1.6rem;
     font-weight: bold;
@@ -46,24 +47,23 @@
   // background-color: #2b313c;
   border: 1px solid #2b313c;
   transition: all 0.5s ease-in-out;
+  box-shadow: 4px 4px 15px -10px #000;
   .start-btn-text {
     // color: #f1f1f1;
     color: #000;
     font-weight: bold;
-    // &:hover {
-    //   color: #868e96;
-    // }
   }
   &:hover {
-    // background-color: #adb5bd;
     .start-btn-text {
-      color: #000;
-      transition: all 0.5s ease-in-out;
+      opacity: 0.7;
+      transition: all 0.3s ease-in-out;
     }
   }
 }
 
 .home-section {
+  animation-name: fadein-motion;
+  animation-duration: 0.3s;
   &.first {
     height: 748px;
     background-color: #fff0f6;

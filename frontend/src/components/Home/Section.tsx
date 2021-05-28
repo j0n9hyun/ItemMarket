@@ -1,6 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
 const Section = () => {
+  const history = useHistory();
+  const onClickStart = () => {
+    history.push('/market');
+  };
   return (
     <div className='home-section'>
       <section className='home-section first'>
@@ -10,7 +15,7 @@ const Section = () => {
             구하지 청춘의 창공에 미인을 보는 몸이 사막이다. 보이는 광야에서
             원질이 능히 대중을 것이다.
           </p>
-          <div className='start-btn'>
+          <div className='start-btn' onClick={onClickStart}>
             <span className='start-btn-text'>시작하기</span>
           </div>
         </div>
