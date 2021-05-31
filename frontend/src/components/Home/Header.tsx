@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-
+import logo from '../../static/img/jjong.png';
 const Header = () => {
   const history = useHistory();
   const onClickLogo = () => {
@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className='home-header'>
       <div className='home-logo' onClick={onClickLogo}>
-        쫑마켓
+        <img src={logo} alt='이미지 없음 ' />
       </div>
       <div className='home-bar-btns'>
         <span className='home-bar-btn'>로그인</span>
