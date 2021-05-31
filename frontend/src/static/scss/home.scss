@@ -160,8 +160,28 @@
   }
 }
 
-.home-footer {
-  height: 250px;
-  background-color: #343a40;
-  color: #f9f9f9;
+.home-footer-wrapper {
+  height: 120px;
+  background-color: #f8f9fa;
+  color: #495057;
+}
+.home-footer-ul {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  li {
+    margin: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+.home-footer-copyright {
+  width: 50%;
+  opacity: 0.7;
+  margin: 0 auto;
+  font-size: 0.8em;
 }
