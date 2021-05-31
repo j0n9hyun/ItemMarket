@@ -1,5 +1,11 @@
 @use './common.scss';
 
+.loading-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .home-header {
   height: 70px;
   width: 50%;
