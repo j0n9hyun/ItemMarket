@@ -14,12 +14,14 @@
   margin: 30px auto;
   display: flex;
   width: 50%;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
-
+  &.other {
+    width: 100%;
+  }
   .market-item {
     border: 1px solid #f1f1f1;
-    margin: 10px 10px;
+    margin: 30px 15px;
     width: 200px;
     height: 250px;
     border-radius: 10px;
@@ -52,6 +54,77 @@
       height: 60%;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
+    }
+  }
+}
+
+.market-info-wrapper {
+  border-top: 2px solid #f1f1f1;
+}
+.market-info {
+  animation-name: fadein-motion;
+  animation-duration: 0.5s;
+  width: 50%;
+  margin: 30px auto;
+}
+.market-img-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .market-img {
+    margin-bottom: 30px;
+    border-radius: 15px;
+    width: 677px;
+    height: 500px;
+    max-width: 100%;
+  }
+}
+
+.market-info-contents {
+  line-height: 2;
+  .market-info-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  .market-info-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+.market-info-others {
+  border-top: 2px solid #f1f1f1;
+  word-wrap: break-word;
+  .market-info-others-title {
+    margin: 30px 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    .market-info-others-more {
+      font-weight: normal;
+      font-size: 1rem;
+      cursor: pointer;
+      &:hover {
+        color: #868e96;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+  .market-info-others-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .market-info-others-item {
+      width: 200px;
+      height: 250px;
+      margin: 30px 15px;
+      cursor: pointer;
+      box-shadow: 2px 2px 15px -10px #000;
+      border-radius: 15px;
+      &:hover {
+        box-shadow: 0px 2px 25px -10px #000;
+        transition: all 0.5s ease-out;
+      }
     }
   }
 }

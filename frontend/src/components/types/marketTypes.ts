@@ -1,6 +1,6 @@
-export interface MarketList {
+export interface MarketListType {
   userId: number,
-  id: string,
+  id: string | number,
   title: string,
   content: string,
   price: number,

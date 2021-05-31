@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { MarketList } from '../components/types/marketTypes';
+import { MarketListType } from '../components/types/marketTypes';
 
 // export const handlers = [
 //   rest.get(
@@ -17,7 +17,7 @@ import { MarketList } from '../components/types/marketTypes';
 // ];
 
 export const handlers = [
-  rest.get <MarketList> (
+  rest.get <MarketListType> (
     '/market_list',
     (req, res, ctx) => {
       return res(
@@ -214,6 +214,22 @@ export const handlers = [
           content: '꾸에엑',
           price: '1500000',
           url: 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1617087392/noticon/ccfnewdq68nuu8pz0zvv.gif'
+          },
+        {  
+          userId: 25,
+          id: 25,
+          title: '꿱',
+          content: '꾸에엑',
+          price: '1500000',
+          url: 'https://atlantak.com/wp-content/uploads/2019/08/111.jpg'
+          },
+        {  
+          userId: 26,
+          id: 26,
+          title: '기능사 책 ㅍ',
+          content: 'aaaaaaaaaaaaaaaaaa',
+          price: '15000',
+          url: 'https://t1.daumcdn.net/cfile/blog/991B154A5E0D24A51B'
           },
         ]
         ),
