@@ -18,7 +18,10 @@
     font-weight: bold;
     cursor: pointer;
     @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
+      // font-size: 1.2rem;
+      img {
+        width: 80px;
+      }
     }
   }
 
@@ -165,6 +168,7 @@
   background-color: #f8f9fa;
   color: #495057;
 }
+
 .home-footer-ul {
   display: flex;
   width: 50%;

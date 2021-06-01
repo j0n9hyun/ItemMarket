@@ -6,6 +6,14 @@ export const marketItemIdState = atom({
   default: '',
 })
 
+export const formIdState = atom({
+  key: 'formIdState',
+  default: '',
+})
+export const formPwState = atom({
+  key: 'formPwState',
+  default: '',
+})
 
 export const challengesSelector = selector({
   key: 'challengesSelector',

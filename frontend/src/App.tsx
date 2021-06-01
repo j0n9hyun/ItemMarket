@@ -5,9 +5,12 @@ import { RecoilRoot } from 'recoil';
 import NotFound from './components/Error';
 import Home from './components/Home';
 import Loading from './components/Loading';
+import Login from './components/Login';
+import Logout from './components/Logout';
 import Market from './components/Market';
 import MarketArticle from './components/Market/MarketArticle';
 import Profile from './components/Profile';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
               <Route path='/market/:id' component={MarketArticle} />
               <Route path='/market' component={Market} />
               <Route path='/profile' component={Profile} />
+              <Route path='/login' component={Login} />
+              <Route path='/logout' component={Logout} />
+              <Route path='/register' component={Register} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
