@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
 import marketRouter from './routes/market';
+// import './index'
+import './index';
 
 const app = express();
 
@@ -14,7 +16,6 @@ app.use(cors());
 app.use(helmet());
 // app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/market', marketRouter);
 
 app.use((error: any, req: any, res: { sendStatus: (arg0: number) => void; }, next: any) => {
