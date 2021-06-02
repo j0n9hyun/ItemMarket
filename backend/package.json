@@ -1,25 +1,35 @@
 {
   "name": "backend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "concurrently \"yarn start\" \"cd ../frontend && yarn start --prefix frontend\" "
+    "start": "node app.js",
+    "dev": "nodemon --exec ts-node app.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "concurrently": "^6.2.0",
-    "cookie-parser": "~1.4.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "ejs": "~2.6.1",
-    "express": "~4.16.1",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^4.6.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.11",
-    "morgan": "~1.9.1",
-    "nodemon": "^2.0.7",
+    "morgan": "^1.10.0",
     "socket.io": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.12",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^15.6.1",
+    "nodemon": "^2.0.7",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
   }
 }
