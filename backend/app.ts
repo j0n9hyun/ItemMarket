@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
 import marketRouter from './routes/market';
-// import './index'
+import usersRouter from './routes/users';
 import { dbConnect } from './models/index';
 
 const app = express();
@@ -17,12 +17,20 @@ app.use(cors());
 app.use(helmet());
 // app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', usersRouter);
 app.use('/market', marketRouter);
 
-app.use((error: any, req: any, res: { sendStatus: (arg0: number) => void; }, next: any) => {
-  console.error(error);
-  res.sendStatus(500);
-});
+app.use(
+  (
+    error: any,
+    req: any,
+    res: { sendStatus: (arg0: number) => void },
+    next: any
+  ) => {
+    console.error(error);
+    res.sendStatus(500);
+  }
+);
 
 app.listen(8080);
 
