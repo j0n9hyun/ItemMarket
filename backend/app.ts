@@ -5,10 +5,11 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import marketRouter from './routes/market';
 // import './index'
-import './index';
+import { dbConnect } from './models/index';
 
 const app = express();
 
+dbConnect();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
