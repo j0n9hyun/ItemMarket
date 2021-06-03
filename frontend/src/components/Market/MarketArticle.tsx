@@ -6,7 +6,7 @@ import { MarketListType } from '../types/marketTypes';
 import MarketArticleView from './MarketArticleView';
 
 const MarketArticle = () => {
-  const { id } = useParams<any>();
+  const { id } = useParams<{ id: string }>();
   const marketList = useRecoilValue(challengesSelector);
   const marketInfo = marketList
     .filter((v: MarketListType) => v.id === parseInt(id))

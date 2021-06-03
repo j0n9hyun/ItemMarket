@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router';
-import { MarketListType } from '../types/marketTypes';
+import { MarketList, MarketListType } from '../types/marketTypes';
 
-const MarketItemsView = ({ marketList }: any) => {
+const MarketItemsView = ({ marketList }: MarketList) => {
   const history = useHistory();
   return (
     <section className='market-list'>
