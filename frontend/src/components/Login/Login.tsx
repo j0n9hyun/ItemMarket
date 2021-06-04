@@ -3,7 +3,7 @@ import Header from '../Home/Header';
 import '../../static/scss/form.scss';
 import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet-async';
-import { formIdState, formPwState } from '../atoms/marketState';
+import { formIdState, formPwState } from '../atoms/authState';
 import { useRecoilState } from 'recoil';
 import LoginView from './LoginView';
 import { eventType } from '../types/authTypes';

@@ -1,3 +1,4 @@
+import { createConnection } from 'typeorm';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -5,11 +6,16 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import marketRouter from './routes/market';
 import usersRouter from './routes/users';
-import { dbConnect } from './models/index';
+import { User } from './entity/User';
 
+createConnection()
+  .then(async (connection) => {
+    const users = await connection.manager.find(User);
+    console.log('Loaded users: ', users);
+  })
+  .catch((err) => console.log(err));
 const app = express();
 
-dbConnect();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,7 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { useHistory } from 'react-router';
-import { useSetRecoilState } from 'recoil';
-import { formIdState, formPwState } from '../atoms/marketState';
+import { useRecoilState } from 'recoil';
+import {
+  formIdState,
+  formPwState,
+  formNameState,
+  registerSubmitState,
+  formPwConfirmState,
+} from '../atoms/authState';
 import Footer from '../Home/Footer';
 import Header from '../Home/Header';
 import { eventType } from '../types/authTypes';
@@ -9,8 +15,10 @@ import RegisterView from './RegisterView';
 
 const Register = () => {
   const history = useHistory();
-  const setId = useSetRecoilState(formIdState);
-  const setPw = useSetRecoilState(formPwState);
+  const [pw, setPw] = useRecoilState(formPwState);
+  const [id, setId] = useRecoilState(formIdState);
+  const [pwConfirm, setPwConfirm] = useRecoilState(formPwConfirmState);
+  const [name, setName] = useRecoilState(formNameState);
   const onClickLogin = () => {
     history.push('/login');
   };
@@ -20,11 +28,31 @@ const Register = () => {
   const onChangePw = (e: eventType) => {
     setPw(e.target.value);
   };
+  const onChangePwConfirm = (e: eventType) => {
+    setPwConfirm(e.target.value);
+  };
+  const onChangeName = (e: eventType) => {
+    setName(e.target.value);
+  };
+
+  const onSubmit = (e: eventType) => {
+    e.preventDefault();
+    if (pw === pwConfirm) {
+      registerSubmitState(id, pw, name);
+      window.location.reload();
+    } else {
+      console.log('Not Match');
+    }
+  };
+
   const props = {
     history,
     onChangeId,
     onChangePw,
+    onChangePwConfirm,
     onClickLogin,
+    onChangeName,
+    onSubmit,
   };
   return (
     <>

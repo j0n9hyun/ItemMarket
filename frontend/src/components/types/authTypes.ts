@@ -12,12 +12,15 @@ export interface LoginType {
 }
 
 export interface eventType {
-  target: { value: string | ((currVal: string) => string) }
-  preventDefault: () => void 
+  target: { value: string | ((currVal: string) => string) };
+  preventDefault: () => void;
 }
 
 export interface RegisterType {
   onChangeId: any;
   onChangePw: any;
+  onChangePwConfirm: any;
+  onChangeName: any;
+  onSubmit: any;
   onClickLogin: () => void;
 }
