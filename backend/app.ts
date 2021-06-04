@@ -11,6 +11,7 @@ import { User } from './entity/User';
 createConnection()
   .then(async (connection) => {
     const users = await connection.manager.find(User);
+    // const userRepository = connection.getRepository(User);
     console.log('Loaded users: ', users);
   })
   .catch((err) => console.log(err));

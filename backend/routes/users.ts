@@ -13,17 +13,21 @@ router.post(
   '/register',
   body('password').trim().isLength({ min: 2 }).withMessage('no'),
   async (req, res) => {
+    const hashed = await bcrypt.hash(req.body.password, saltRounds);
+    const userRepository = getRepository(User);
+    const user = await userRepository.create(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const register = new User();
-    const hashed = await bcrypt.hash(req.body.password, saltRounds);
-    register.userId = req.body.userId;
-    register.name = req.body.name;
-    register.password = hashed;
-    const userRepository = getRepository(User);
-    await userRepository.save(register);
+    // const register = new User();
+    // register.userId = req.body.userId;
+    // register.name = req.body.name;
+    // register.password = hashed;
+    // await userRepository.save(register);
+    const aa = await userRepository.findOne({ id: '40' });
+    console.log(aa);
+    await userRepository.save(user);
   }
 );
 router.post('/login', (req, res) => {});
