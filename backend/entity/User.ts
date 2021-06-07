@@ -18,4 +18,10 @@ export class User {
     default: false,
   })
   isAdmin: boolean;
+
+  @Column({ default: '' })
+  token: string;
+
+  @Column({ type: 'timestamp' })
+  createdAt: Date;
 }

@@ -3,7 +3,7 @@ import Header from '../Home/Header';
 import '../../static/scss/form.scss';
 import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet-async';
-import { formIdState, formPwState } from '../atoms/authState';
+import { formIdState, formPwState, loginSubmitState } from '../atoms/authState';
 import { useRecoilState } from 'recoil';
 import LoginView from './LoginView';
 import { eventType } from '../types/authTypes';
@@ -26,7 +26,9 @@ const Login = () => {
 
   const onSubmit = (e: eventType) => {
     e.preventDefault();
-    console.log(id, pw);
+    loginSubmitState(id, pw).then((res: any) =>
+      res.auth ? history.push('/market') : window.location.reload()
+    );
   };
   const props = {
     onClickRegister,

@@ -30,3 +30,11 @@ export async function registerSubmitState(
   });
   return response.data;
 }
+
+export async function loginSubmitState(id: string, pw: string) {
+  const response = await axios.post('http://localhost:8080/login', {
+    userId: id,
+    password: pw,
+  });
+  return response.data;
+}
