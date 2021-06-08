@@ -6,9 +6,8 @@ const MarketItemsView = ({ marketList }: MarketList) => {
   return (
     <section className='market-list'>
       <div className='market-items'>
-        {[...marketList]
-          .reverse()
-          .map(({ id, title, content, url, price }: MarketListType) => (
+        {marketList.map(
+          ({ id, title, content, url, price }: MarketListType) => (
             <article
               className='market-item'
               key={id}
@@ -23,7 +22,8 @@ const MarketItemsView = ({ marketList }: MarketList) => {
                 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
               </div>
             </article>
-          ))}
+          )
+        )}
       </div>
     </section>
   );

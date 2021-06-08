@@ -29,7 +29,10 @@ const MarketArticleView = ({ marketInfo, marketOthers }: any) => {
               <section className='market-info-contents'>
                 <div className='market-info-title'>{marketInfo.title}</div>
                 <div className='market-info-price'>
-                  {marketInfo.price.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+                  {marketInfo.price
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                  원
                 </div>
                 <div className='market-info-content'>{marketInfo.content}</div>
               </section>
@@ -45,45 +48,41 @@ const MarketArticleView = ({ marketInfo, marketOthers }: any) => {
                 </div>
 
                 <div className='market-items other'>
-                  {marketOthers
-                    .reverse()
-                    .map(
-                      (
-                        { id, title, content, url, price }: MarketListType,
-                        idx: any
-                      ) => (
-                        <>
-                          {idx <= 7 && (
-                            <article
-                              className='market-item'
-                              onClick={() => {
-                                window.scrollTo({
-                                  top: 0,
-                                  behavior: 'smooth',
-                                });
-                                history.push(`/market/${id}`);
-                              }}
-                            >
-                              <img
-                                className='market-cover'
-                                src={url}
-                                alt={title}
-                              />
-                              <div className='market-title'>{title}</div>
-                              <div className='market-description'>
-                                {content}
-                              </div>
-                              <div className='market-price'>
-                                {price
-                                  .toString()
-                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                원
-                              </div>
-                            </article>
-                          )}
-                        </>
-                      )
-                    )}
+                  {marketOthers.map(
+                    (
+                      { id, title, content, url, price }: MarketListType,
+                      idx: any
+                    ) => (
+                      <>
+                        {idx <= 7 && (
+                          <article
+                            className='market-item'
+                            onClick={() => {
+                              window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth',
+                              });
+                              history.push(`/market/${id}`);
+                            }}
+                          >
+                            <img
+                              className='market-cover'
+                              src={url}
+                              alt={title}
+                            />
+                            <div className='market-title'>{title}</div>
+                            <div className='market-description'>{content}</div>
+                            <div className='market-price'>
+                              {price
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                              원
+                            </div>
+                          </article>
+                        )}
+                      </>
+                    )
+                  )}
                 </div>
               </section>
             </div>

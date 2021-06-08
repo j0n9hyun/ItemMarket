@@ -1,6 +1,8 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
 import * as authController from '../controller/users';
+// import * as validator from '../middleware/validator';
+
 const router = express.Router();
 
 router.post(
