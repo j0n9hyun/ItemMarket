@@ -18,6 +18,10 @@ export const formNameState = atom({
   default: '',
 });
 
+export const loggedState = atom({
+  key: 'loggedState',
+  default: false,
+})
 export async function registerSubmitState(
   id: string,
   pw: string,

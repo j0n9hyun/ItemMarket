@@ -9,7 +9,16 @@ export const marketItemIdState = atom({
 export const challengesSelector = selector({
   key: 'challengesSelector',
   get: async () => {
-    const response = await axios.get('/market_list');
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_IP}/market`
+    );
     return response.data;
   },
 });
+
+export async function logoutState() {
+  const response: any = await axios.get(
+    `${process.env.REACT_APP_SERVER_IP}/logout`
+  );
+  return response.data;
+}

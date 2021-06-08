@@ -3,15 +3,22 @@ import Header from '../Home/Header';
 import '../../static/scss/form.scss';
 import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet-async';
-import { formIdState, formPwState, loginSubmitState } from '../atoms/authState';
+import {
+  formIdState,
+  formPwState,
+  loggedState,
+  loginSubmitState,
+} from '../atoms/authState';
 import { useRecoilState } from 'recoil';
 import LoginView from './LoginView';
 import { eventType } from '../types/authTypes';
+import { useEffect } from 'react';
 
 const Login = () => {
   const history = useHistory();
   const [id, setId] = useRecoilState(formIdState);
   const [pw, setPw] = useRecoilState(formPwState);
+  const [logged, setLogged] = useRecoilState(loggedState);
 
   const onClickRegister = () => {
     history.push('/register');
@@ -26,10 +33,20 @@ const Login = () => {
 
   const onSubmit = (e: eventType) => {
     e.preventDefault();
-    loginSubmitState(id, pw).then((res: any) =>
-      res.auth ? history.push('/market') : window.location.reload()
-    );
+    loginSubmitState(id, pw).then((res: any) => {
+      if (res.auth) {
+        setLogged(true);
+        history.push('/');
+      } else {
+        window.location.reload();
+      }
+    });
   };
+
+  useEffect(() => {
+    setId('');
+    setPw('');
+  }, [setId, setPw]);
   const props = {
     onClickRegister,
     onChangeId,
