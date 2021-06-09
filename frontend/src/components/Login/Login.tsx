@@ -4,12 +4,13 @@ import '../../static/scss/form.scss';
 import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet-async';
 import {
+  authCheckSelector,
   formIdState,
   formPwState,
   loggedState,
   loginSubmitState,
 } from '../atoms/authState';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import LoginView from './LoginView';
 import { eventType } from '../types/authTypes';
 import { useEffect } from 'react';
@@ -34,7 +35,7 @@ const Login = () => {
   const onSubmit = (e: eventType) => {
     e.preventDefault();
     loginSubmitState(id, pw).then((res: any) => {
-      if (res.auth) {
+      if (res.isAuth) {
         setLogged(true);
         history.push('/');
       } else {

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { getRepository } from 'typeorm';
 import { validationResult } from 'express-validator';
@@ -16,7 +16,7 @@ export async function register(req: Request, res: Response) {
     return res.sendStatus(409);
   }
   const hashed = await bcrypt.hash(password, saltRounds);
-  const user = userRepository.create({
+  const user: any = userRepository.create({
     userId: userId,
     password: hashed,
     name: name,
@@ -28,42 +28,52 @@ export async function register(req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  const token = createJwtToken(user);
+  res.status(200).json({ userId, token });
 }
 
 export async function login(req: Request, res: Response) {
   const userRepository = getRepository(User);
   const { userId, password } = req.body;
-  const userInfo: any = await userRepository.findOne({
-    userId: userId,
+  const user: any = await userRepository.findOne({
+    userId,
   });
-  if (!userInfo) {
+  if (!user) {
     return res.sendStatus(401);
   }
 
-  const match = await bcrypt.compare(password, userInfo.password);
-  if (match) {
-    const token = jwt.sign(userId, process.env.TOKEN_SECRET as string);
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(401).json({ message: 'Invaild Id or pw' });
+  }
+
+  const token = createJwtToken(user.userId);
+
+  if (token) {
     await userRepository.update({ userId }, { token: token });
-    res.cookie('x_auth', token).status(200).json({ auth: true });
-  } else {
-    return res.sendStatus(401);
+    return res
+      .cookie('token', token, { httpOnly: true })
+      .status(200)
+      .json({ isAuth: true, userId, token });
   }
-
-  // jwt.verify(
-  //   token,
-  //   process.env.TOKEN_SECRET as string,
-  //   async function (err: any, decoded: any) {
-  //     const findToken = await userRepository.findOne({
-  //       userId: decoded,
-  //       token: token,
-  //     });
-  //     if (!findToken || err) console.log('invaild token');
-  //   }
-  // );
 }
 
 export async function logout(req: Request, res: Response) {
   const { userId } = req.body;
   await getRepository(User).update({ userId }, { token: '' });
   return res.sendStatus(200);
+}
+
+function createJwtToken(id: string) {
+  return jwt.sign({ id }, process.env.TOKEN_SECRET as string, {
+    expiresIn: 60,
+  });
+}
+
+export async function me(req: any, res: any) {
+  const user = await getRepository(User).findOne({ userId: req.body.userId });
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+  res.status(200).json({ isAuth: true, username: req.body.userId });
 }

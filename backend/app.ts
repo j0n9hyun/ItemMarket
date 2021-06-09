@@ -16,13 +16,17 @@ createConnection()
   .catch((err) => console.log(err));
 const app = express();
 
-app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 app.use(helmet());
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', usersRouter);
 app.use('/market', marketRouter);
 
