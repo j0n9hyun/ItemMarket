@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import '../env';
 
 const saltRounds = 10;
+const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
 
 export async function register(req: Request, res: Response) {
   const userRepository = getRepository(User);
@@ -44,7 +45,7 @@ export async function login(req: Request, res: Response) {
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    return res.status(401).json({ message: 'Invaild Id or pw' });
+    return res.status(401).json({ message: 'Invalid Id or pw' });
   }
 
   const token = createJwtToken(user.userId);
@@ -52,7 +53,10 @@ export async function login(req: Request, res: Response) {
   if (token) {
     await userRepository.update({ userId }, { token: token });
     return res
-      .cookie('token', token, { httpOnly: true })
+      .cookie('token', token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + KR_TIME_DIFF + 900000),
+      })
       .status(200)
       .json({ isAuth: true, userId, token });
   }
@@ -71,9 +75,13 @@ function createJwtToken(id: string) {
 }
 
 export async function me(req: any, res: any) {
-  const user = await getRepository(User).findOne({ userId: req.body.userId });
-  if (!user) {
+  // const user = await getRepository(User).findOne({ userId: req.body.userId });
+  const test = await getRepository(User).findOne({ token: req.cookies.token });
+  console.log(test);
+  if (!test) {
     return res.status(404).json({ message: 'User not found' });
   }
-  res.status(200).json({ isAuth: true, username: req.body.userId });
+  // res.status(200).json({ isAuth: true, username: req.body.userId });
+  // res.status(200).json({ userId: req.body.userId, isAuth: true });
+  res.status(200).json({ isAuth: true });
 }

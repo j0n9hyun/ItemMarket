@@ -12,14 +12,15 @@ export const isAuth = async (
   next: NextFunction
 ) => {
   const authHeader = req.get('Authorization');
+  const userRepository = getRepository(User);
   if (!(authHeader && authHeader.startsWith('Bearer '))) {
     return res.status(401).json(AUTH_ERROR);
   }
-  const userRepository = getRepository(User);
   const token = authHeader.split(' ')[1];
   if (!token) {
     return res.sendStatus(401);
   }
+  // let token = req.cookies.token;
   jwt.verify(
     token,
     process.env.TOKEN_SECRET as string,

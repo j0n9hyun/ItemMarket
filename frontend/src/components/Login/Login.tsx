@@ -9,6 +9,7 @@ import {
   formPwState,
   loggedState,
   loginSubmitState,
+  tokenState,
 } from '../atoms/authState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import LoginView from './LoginView';
@@ -20,6 +21,7 @@ const Login = () => {
   const [id, setId] = useRecoilState(formIdState);
   const [pw, setPw] = useRecoilState(formPwState);
   const [logged, setLogged] = useRecoilState(loggedState);
+  const [token, setToken] = useRecoilState(tokenState);
 
   const onClickRegister = () => {
     history.push('/register');
@@ -36,6 +38,8 @@ const Login = () => {
     e.preventDefault();
     loginSubmitState(id, pw).then((res: any) => {
       if (res.isAuth) {
+        console.log(res);
+        setToken(res.token);
         setLogged(true);
         history.push('/');
       } else {

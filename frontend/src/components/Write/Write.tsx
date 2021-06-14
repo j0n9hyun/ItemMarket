@@ -5,9 +5,14 @@ import '../../static/scss/write.scss';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Write = () => {
   const [value, setValue] = useState('');
+  const onClickWrite = () => {
+    console.log(value);
+    axios.get(`${process.env.REACT_APP_SERVER_IP}/market`);
+  };
   return (
     <>
       <Helmet>
@@ -30,7 +35,9 @@ const Write = () => {
           onChange={setValue}
         />
         <div className='write-submit-wrapper'>
-          <button className='write-submit-btn'>작성하기</button>
+          <button className='write-submit-btn' onClick={onClickWrite}>
+            작성하기
+          </button>
           <button className='write-submit-btn'>돌아가기</button>
         </div>
         <Footer />

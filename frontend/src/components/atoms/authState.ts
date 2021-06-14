@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { atom, selector } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 
 export const formIdState = atom({
   key: 'formIdState',
@@ -21,6 +21,11 @@ export const formNameState = atom({
 export const loggedState = atom({
   key: 'loggedState',
   default: false,
+});
+
+export const tokenState = atom({
+  key: 'tokenState',
+  default: '',
 });
 export async function registerSubmitState(
   id: string,
@@ -56,7 +61,12 @@ export const authCheckSelector = selector({
   key: 'authCheckSelector',
   get: async () => {
     const response: any = await axios.post(
-      `${process.env.REACT_APP_SERVER_IP}/me`
+      `${process.env.REACT_APP_SERVER_IP}/me`,
+      {
+        headers: {
+          Authorization: 'Bearer ',
+        },
+      }
     );
     return response.data;
   },

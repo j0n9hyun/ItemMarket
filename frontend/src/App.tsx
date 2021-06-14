@@ -12,6 +12,7 @@ import MarketArticle from './components/Market/MarketArticle';
 import Profile from './components/Profile';
 import Register from './components/Register';
 import Write from './components/Write';
+import Auth from './components/hoc/Auth';
 
 function App() {
   return (

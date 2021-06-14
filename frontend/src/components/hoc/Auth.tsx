@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { authCheckSelector, loggedState } from '../atoms/authState';
+import { authCheckSelector, loggedState, tokenState } from '../atoms/authState';
 
 /*
 null: everyone,
@@ -16,9 +16,12 @@ export default function Auth(
   function Authentication() {
     const history = useHistory();
     const [logged, setLogged] = useRecoilState(loggedState);
-    // // const setIsLogin = useSetRecoilState(isLoginState);
-    const { isAuth } = useRecoilValue(authCheckSelector);
-    console.log(isAuth);
+    // const setIsLogin = useSetRecoilState(isLoginState);
+    // const token = useRecoilValue(tokenState);
+    // console.log(token);
+    // const { isAuth } = useRecoilValue(authCheckSelector);
+    const test = useRecoilValue(authCheckSelector);
+    console.log(test);
     // useEffect(() => {
     //   if (!isAuth) {
     //     setIsLogin(false);
