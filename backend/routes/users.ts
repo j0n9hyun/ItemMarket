@@ -15,6 +15,6 @@ const loginValidator = [...registerValidator];
 router.post('/register', registerValidator, authController.register);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
-router.post('/me', isAuth, authController.me);
+router.get('/me', authController.me);
 
 export default router;

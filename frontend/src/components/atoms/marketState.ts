@@ -17,8 +17,9 @@ export const challengesSelector = selector({
 });
 
 export async function logoutState() {
-  const response: any = await axios.get(
-    `${process.env.REACT_APP_SERVER_IP}/logout`
-  );
-  return response.data;
+  return localStorage.clear();
+  // const response: any = await axios.get(
+  //   `${process.env.REACT_APP_SERVER_IP}/logout`
+  // );
+  // return response.data;
 }

@@ -20,7 +20,6 @@ export const isAuth = async (
   if (!token) {
     return res.sendStatus(401);
   }
-  // let token = req.cookies.token;
   jwt.verify(
     token,
     process.env.TOKEN_SECRET as string,

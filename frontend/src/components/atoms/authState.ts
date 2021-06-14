@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { atom, selector, selectorFamily } from 'recoil';
+import TokenStorage from '../../db/token';
 
 export const formIdState = atom({
   key: 'formIdState',
@@ -49,22 +50,21 @@ export async function loginSubmitState(id: string, pw: string) {
     {
       userId: id,
       password: pw,
-    },
-    {
-      withCredentials: true,
     }
   );
+  localStorage.setItem('TOKEN', response.data.token);
   return response.data;
 }
 
 export const authCheckSelector = selector({
   key: 'authCheckSelector',
   get: async () => {
-    const response: any = await axios.post(
+    const token = localStorage.getToken();
+    const response: any = await axios.get(
       `${process.env.REACT_APP_SERVER_IP}/me`,
       {
         headers: {
-          Authorization: 'Bearer ',
+          Authorization: `Bearer ${token}`,
         },
       }
     );
