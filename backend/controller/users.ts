@@ -69,12 +69,9 @@ function createJwtToken(id: string) {
 }
 
 export async function me(req: any, res: any) {
-  const authHeader = req.get('Authorization');
-  if (!authHeader) return res.sendStatus(404);
-  let token = authHeader.split(' ')[1];
-  const user = await getRepository(User).findOne({ token: token });
+  const user = await getRepository(User).findOne({ userId: req.userId });
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-  res.status(200).json({ isAuth: true, userId: user.userId, name: user.name });
+  res.status(200).json({ isAuth: true, userId: req.userId, name: req.name });
 }
