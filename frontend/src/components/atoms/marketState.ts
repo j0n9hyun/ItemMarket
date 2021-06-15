@@ -15,11 +15,3 @@ export const challengesSelector = selector({
     return response.data;
   },
 });
-
-export async function logoutState() {
-  return localStorage.clear();
-  // const response: any = await axios.get(
-  //   `${process.env.REACT_APP_SERVER_IP}/logout`
-  // );
-  // return response.data;
-}

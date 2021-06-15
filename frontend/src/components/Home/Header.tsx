@@ -1,11 +1,11 @@
 import { useHistory } from 'react-router';
 import { useRecoilState } from 'recoil';
+import { clearToken } from '../../db/token';
 import logo from '../../static/img/jjong.png';
 import { loggedState } from '../atoms/authState';
-import { logoutState } from '../atoms/marketState';
 const Header = () => {
   const history = useHistory();
-  const [logged, setLogged] = useRecoilState(loggedState);
+  const [isLogin, setIsLogin] = useRecoilState(loggedState);
   const onClickLogo = () => {
     history.push('/');
   };
@@ -13,8 +13,9 @@ const Header = () => {
     history.push('/login');
   };
   const onClickLogout = () => {
-    setLogged(false);
-    logoutState();
+    setIsLogin(false);
+    clearToken();
+    window.location.reload();
   };
   const onClickRegister = () => {
     history.push('/register');
@@ -30,15 +31,15 @@ const Header = () => {
       <div className='home-bar-btns'>
         <span
           className='home-bar-btn'
-          onClick={logged ? onClickProfile : onClickLogin}
+          onClick={isLogin ? onClickProfile : onClickLogin}
         >
-          {logged ? '프로필' : '로그인'}
+          {isLogin ? '프로필' : '로그인'}
         </span>
         <span
           className='home-bar-btn'
-          onClick={logged ? onClickLogout : onClickRegister}
+          onClick={isLogin ? onClickLogout : onClickRegister}
         >
-          {logged ? '로그아웃' : '회원가입'}
+          {isLogin ? '로그아웃' : '회원가입'}
         </span>
       </div>
     </header>

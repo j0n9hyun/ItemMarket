@@ -52,13 +52,7 @@ export async function login(req: Request, res: Response) {
 
   if (token) {
     await userRepository.update({ userId }, { token: token });
-    return res
-      .cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + KR_TIME_DIFF + 900000),
-      })
-      .status(200)
-      .json({ isAuth: true, userId, token });
+    return res.status(200).json({ isAuth: true, userId, token });
   }
 }
 
@@ -75,13 +69,12 @@ function createJwtToken(id: string) {
 }
 
 export async function me(req: any, res: any) {
-  // const user = await getRepository(User).findOne({ userId: req.body.userId });
-  const test = await getRepository(User).findOne({ token: req.cookies.token });
-  console.log(test);
-  if (!test) {
+  const authHeader = req.get('Authorization');
+  if (!authHeader) return res.sendStatus(404);
+  let token = authHeader.split(' ')[1];
+  const user = await getRepository(User).findOne({ token: token });
+  if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-  // res.status(200).json({ isAuth: true, username: req.body.userId });
-  // res.status(200).json({ userId: req.body.userId, isAuth: true });
   res.status(200).json({ isAuth: true });
 }

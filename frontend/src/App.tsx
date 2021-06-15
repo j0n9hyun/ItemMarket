@@ -21,14 +21,14 @@ function App() {
         <RecoilRoot>
           <Suspense fallback={<Loading />}>
             <Switch>
-              <Route path='/' exact component={Home} />
-              <Route path='/market/:id' component={MarketArticle} />
-              <Route path='/market' component={Market} />
-              <Route path='/profile' component={Profile} />
-              <Route path='/login' component={Login} />
-              <Route path='/logout' component={Logout} />
+              <Route path='/' exact component={Auth(Home, null)} />
+              <Route path='/market/:id' component={Auth(MarketArticle, true)} />
+              <Route path='/market' component={Auth(Market, true)} />
+              <Route path='/profile' component={Auth(Profile, true)} />
+              <Route path='/login' component={Auth(Login, false)} />
+              <Route path='/logout' component={Auth(Logout, true)} />
               <Route path='/register' component={Register} />
-              <Route path='/write' component={Write} />
+              <Route path='/write' component={Auth(Write, true)} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { atom, selector, selectorFamily } from 'recoil';
-import TokenStorage from '../../db/token';
+import { atom, selector } from 'recoil';
+import { getToken, saveToken } from '../../db/token';
 
 export const formIdState = atom({
   key: 'formIdState',
@@ -24,10 +24,6 @@ export const loggedState = atom({
   default: false,
 });
 
-export const tokenState = atom({
-  key: 'tokenState',
-  default: '',
-});
 export async function registerSubmitState(
   id: string,
   pw: string,
@@ -52,22 +48,22 @@ export async function loginSubmitState(id: string, pw: string) {
       password: pw,
     }
   );
-  localStorage.setItem('TOKEN', response.data.token);
+  saveToken(response.data.token);
   return response.data;
 }
 
 export const authCheckSelector = selector({
   key: 'authCheckSelector',
   get: async () => {
-    const token = localStorage.getToken();
-    const response: any = await axios.get(
-      `${process.env.REACT_APP_SERVER_IP}/me`,
-      {
+    const token = getToken();
+    const response: any = await axios
+      .get(`${process.env.REACT_APP_SERVER_IP}/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
+      })
+      .catch((err: any) => err.response.status);
+
     return response.data;
   },
 });

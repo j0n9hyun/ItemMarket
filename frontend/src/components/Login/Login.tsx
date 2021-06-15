@@ -3,15 +3,8 @@ import Header from '../Home/Header';
 import '../../static/scss/form.scss';
 import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet-async';
-import {
-  authCheckSelector,
-  formIdState,
-  formPwState,
-  loggedState,
-  loginSubmitState,
-  tokenState,
-} from '../atoms/authState';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { formIdState, formPwState, loginSubmitState } from '../atoms/authState';
+import { useRecoilState } from 'recoil';
 import LoginView from './LoginView';
 import { eventType } from '../types/authTypes';
 import { useEffect } from 'react';
@@ -20,8 +13,6 @@ const Login = () => {
   const history = useHistory();
   const [id, setId] = useRecoilState(formIdState);
   const [pw, setPw] = useRecoilState(formPwState);
-  const [logged, setLogged] = useRecoilState(loggedState);
-  const [token, setToken] = useRecoilState(tokenState);
 
   const onClickRegister = () => {
     history.push('/register');
@@ -38,10 +29,7 @@ const Login = () => {
     e.preventDefault();
     loginSubmitState(id, pw).then((res: any) => {
       if (res.isAuth) {
-        console.log(res);
-        setToken(res.token);
-        setLogged(true);
-        history.push('/');
+        window.location.reload();
       } else {
         window.location.reload();
       }
