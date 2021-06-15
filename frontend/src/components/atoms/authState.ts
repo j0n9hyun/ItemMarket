@@ -59,8 +59,10 @@ export const authCheckSelector = selector({
     const response: any = await axios
       .get(`${process.env.REACT_APP_SERVER_IP}/me`, {
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
+        withCredentials: true,
       })
       .catch((err: any) => err.response.status);
 

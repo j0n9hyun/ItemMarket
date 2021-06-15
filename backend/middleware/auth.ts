@@ -6,11 +6,7 @@ import '../env';
 
 const AUTH_ERROR = { message: 'Authentication Error' };
 
-export const isAuth = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const isAuth = async (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.get('Authorization');
   const userRepository = getRepository(User);
   if (!(authHeader && authHeader.startsWith('Bearer '))) {
@@ -27,10 +23,12 @@ export const isAuth = async (
       if (error) {
         return res.status(401).json(AUTH_ERROR);
       }
-      const user: any = await userRepository.find({ userId: decoded.id });
+      const user: any = await userRepository.findOne({ userId: decoded.id });
       if (!user) {
         return res.status(401).json(AUTH_ERROR);
       }
+      req.userId = user.userId; // req.customData
+      req.name = user.name;
       next();
     }
   );

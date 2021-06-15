@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import marketRouter from './routes/market';
 import usersRouter from './routes/users';
-import cookieParser from 'cookie-parser';
+
 createConnection()
   .then(async (connection) => {
     // const users = await connection.manager.find(User);
@@ -19,7 +19,6 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(
   cors({
     origin: 'http://localhost:3000',
