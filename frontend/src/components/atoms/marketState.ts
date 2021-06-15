@@ -15,3 +15,24 @@ export const challengesSelector = selector({
     return response.data;
   },
 });
+
+export async function createArticle(
+  name: string,
+  title: string,
+  content: string,
+  price: number,
+  url: string
+) {
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER_IP}/market`,
+    {
+      name: name,
+      title: title,
+      content: content,
+      price: price,
+      url: url,
+    }
+  );
+
+  return response.data;
+}

@@ -1,10 +1,10 @@
 import { Response, Request } from 'express';
 import { validationResult } from 'express-validator';
 import { getRepository } from 'typeorm';
-import { Market } from '../entity/Market';
+import { MarketArticle } from '../entity/Market';
 
 export async function getMarket(req: Request, res: Response) {
-  const marketRepository = getRepository(Market);
+  const marketRepository = getRepository(MarketArticle);
   const user = await marketRepository.find();
   res.status(200).json(user);
 
@@ -15,10 +15,10 @@ export async function getMarket(req: Request, res: Response) {
   }
 }
 export async function createMarket(req: Request, res: Response) {
-  const marketRepository = getRepository(Market);
-  const { userId, title, content, price, url } = req.body;
+  const marketRepository = getRepository(MarketArticle);
+  const { name, title, content, price, url } = req.body;
   const user = marketRepository.create({
-    userId: userId,
+    name: name,
     title: title,
     content: content,
     price: price,

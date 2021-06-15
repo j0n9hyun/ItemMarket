@@ -5,13 +5,61 @@ import '../../static/scss/write.scss';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
-import axios from 'axios';
+import { createArticle } from '../atoms/marketState';
+import { authCheckSelector } from '../atoms/authState';
+import { useRecoilValue } from 'recoil';
+import { useHistory } from 'react-router-dom';
 
 const Write = () => {
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
+  const history = useHistory();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const { name } = useRecoilValue(authCheckSelector);
   const onClickWrite = () => {
-    console.log(value);
-    axios.get(`${process.env.REACT_APP_SERVER_IP}/market`);
+    createArticle(name, title, content, 300, 'url');
+    history.push('/market');
+  };
+
+  const onChangeTitle = (e: any) => {
+    setTitle(e.target.value);
+  };
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image'],
+      [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
+      ['clean'],
+    ],
+  };
+
+  const formats = [
+    // 'font',
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'align',
+    'color',
+    'background',
+  ];
+  const onChangeContent = (e: any) => {
+    setContent(e);
   };
   return (
     <>
@@ -22,7 +70,11 @@ const Write = () => {
       <div className='write-wrapper'>
         <div className='write-title'>글 작성하기</div>
         <div className='write-title-input'>
-          <input type='text' placeholder='제목을 입력해주세요' />
+          <input
+            type='text'
+            placeholder='제목을 입력해주세요'
+            onChange={onChangeTitle}
+          />
         </div>
         <ReactQuill
           style={{
@@ -30,9 +82,13 @@ const Write = () => {
             width: '50%',
             margin: '30px auto 60px',
           }}
-          theme='snow'
-          value={value}
-          onChange={setValue}
+          placeholder='내용을 입력해주세요'
+          // value={value}
+          onChange={(content, delta, source, editor) =>
+            onChangeContent(editor.getText())
+          }
+          modules={modules}
+          formats={formats}
         />
         <div className='write-submit-wrapper'>
           <button className='write-submit-btn' onClick={onClickWrite}>

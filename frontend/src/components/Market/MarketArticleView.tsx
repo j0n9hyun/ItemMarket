@@ -28,6 +28,7 @@ const MarketArticleView = ({ marketInfo, marketOthers }: any) => {
               </div>
               <section className='market-info-contents'>
                 <div className='market-info-title'>{marketInfo.title}</div>
+                {marketInfo.name}님의 게시글
                 <div className='market-info-price'>
                   {marketInfo.price
                     .toString()

@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class Market {
+export class MarketArticle {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  userId: number;
+  name: string;
 
   @Column()
   title: string;

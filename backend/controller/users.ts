@@ -76,5 +76,5 @@ export async function me(req: any, res: any) {
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-  res.status(200).json({ isAuth: true });
+  res.status(200).json({ isAuth: true, userId: user.userId, name: user.name });
 }
