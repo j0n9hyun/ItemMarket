@@ -64,7 +64,7 @@ const Section = () => {
                 <li>Node v14</li>
                 <li>Express</li>
                 <li>JWT Token</li>
-                <li>Swagger</li>
+                <li>MySQL2</li>
                 <li>TypeORM</li>
                 <li>Socket.io</li>
               </div>

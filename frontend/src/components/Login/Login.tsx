@@ -37,8 +37,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    setId('');
-    setPw('');
+    setId(''); setPw('');
   }, [setId, setPw]);
   const props = {
     onClickRegister,
