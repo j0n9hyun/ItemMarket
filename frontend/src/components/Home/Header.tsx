@@ -2,7 +2,7 @@ import { useHistory } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { clearToken } from '../../db/token';
 import logo from '../../static/img/jjong.png';
-import { loggedState } from '../atoms/authState';
+import { loggedState, logoutSubmitState } from '../atoms/authState';
 const Header = () => {
   const history = useHistory();
   const [isLogin, setIsLogin] = useRecoilState(loggedState);
@@ -13,6 +13,7 @@ const Header = () => {
     history.push('/login');
   };
   const onClickLogout = () => {
+    logoutSubmitState();
     setIsLogin(false);
     clearToken();
     window.location.reload();
@@ -23,12 +24,21 @@ const Header = () => {
   const onClickProfile = () => {
     history.push('/profile');
   };
+  const onClickWrite = () => {
+    history.push('/write');
+  };
   return (
     <header className='home-header'>
       <div className='home-logo' onClick={onClickLogo}>
         <img src={logo} alt='이미지 없음 ' />
       </div>
       <div className='home-bar-btns'>
+        <span
+          className='home-bar-btn'
+          onClick={isLogin ? onClickWrite : onClickLogin}
+        >
+          {isLogin ? '글쓰기' : null}
+        </span>
         <span
           className='home-bar-btn'
           onClick={isLogin ? onClickProfile : onClickLogin}
