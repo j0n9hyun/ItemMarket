@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import Register from './components/Register';
 import Write from './components/Write';
 import Auth from './components/hoc/Auth';
+import UserArticle from './components/Market/UserArticle';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path='/' exact component={Auth(Home, null)} />
               <Route path='/market/:id' component={Auth(MarketArticle, true)} />
               <Route path='/market' component={Auth(Market, true)} />
+              <Route path='/user/:id' component={UserArticle} />
               <Route path='/profile' component={Auth(Profile, true)} />
               <Route path='/login' component={Auth(Login, false)} />
               <Route path='/logout' component={Auth(Logout, true)} />

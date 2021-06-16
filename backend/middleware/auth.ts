@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
+import { config } from '../config';
 import { User } from '../entity/User';
-import '../env';
 
 const AUTH_ERROR = { message: 'Authentication Error' };
 
@@ -16,9 +16,10 @@ export const isAuth = async (req: any, res: Response, next: NextFunction) => {
   if (!token) {
     return res.sendStatus(401);
   }
+
   jwt.verify(
     token,
-    process.env.TOKEN_SECRET as string,
+    config.TOKEN_SECRET as string,
     async (error: any, decoded: any) => {
       if (error) {
         return res.status(401).json(AUTH_ERROR);

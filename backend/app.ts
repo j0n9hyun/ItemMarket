@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import 'express-async-errors';
 import marketRouter from './routes/market';
 import usersRouter from './routes/users';
@@ -14,18 +15,20 @@ createConnection()
     // const userRepository = connection.getRepository(User);
   })
   .catch((err) => console.log(err));
+
 const app = express();
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 app.use(helmet());
+app.use(cookieParser());
 app.use('/', usersRouter);
 app.use('/market', marketRouter);
 

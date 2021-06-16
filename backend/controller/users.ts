@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, response, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { getRepository } from 'typeorm';
 import { validationResult } from 'express-validator';
 import { User } from '../entity/User';
 import jwt from 'jsonwebtoken';
-import '../env';
+import { config } from '../config';
 
 const saltRounds = 10;
 const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
@@ -39,11 +39,13 @@ export async function login(req: Request, res: Response) {
   const user: any = await userRepository.findOne({
     userId,
   });
+
   if (!user) {
     return res.sendStatus(401);
   }
 
   const match = await bcrypt.compare(password, user.password);
+
   if (!match) {
     return res.status(401).json({ message: 'Invalid Id or pw' });
   }
@@ -52,19 +54,28 @@ export async function login(req: Request, res: Response) {
 
   if (token) {
     await userRepository.update({ userId }, { token: token });
+    setToken(token, res);
     return res.status(200).json({ isAuth: true, userId, token });
   }
 }
 
+async function setToken(token: any, res: any) {
+  res.cookie('authToken', token, {
+    expires: new Date(Date.now() + KR_TIME_DIFF + 150000),
+    httpOnly: true,
+    secure: true,
+  });
+}
+
 export async function logout(req: Request, res: Response) {
   const { userId } = req.body;
-  await getRepository(User).update({ userId }, { token: '' });
+  await getRepository(User).update({ userId: userId }, { token: '' });
   return res.sendStatus(200);
 }
 
 function createJwtToken(id: string) {
-  return jwt.sign({ id }, process.env.TOKEN_SECRET as string, {
-    expiresIn: 60,
+  return jwt.sign({ id }, config.TOKEN_SECRET as string, {
+    expiresIn: '3d',
   });
 }
 

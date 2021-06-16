@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { atom, selector } from 'recoil';
+import { config } from '../../config';
 import { getToken, saveToken } from '../../db/token';
 
 export const formIdState = atom({
@@ -30,11 +31,14 @@ export async function registerSubmitState(
   name: string
 ) {
   const response = await axios.post(
-    `${process.env.REACT_APP_SERVER_IP}/register`,
+    `${config.REMOTE}/register`,
     {
       userId: id,
       password: pw,
       name: name,
+    },
+    {
+      withCredentials: true,
     }
   );
   return response.data;
@@ -42,13 +46,23 @@ export async function registerSubmitState(
 
 export async function loginSubmitState(id: string, pw: string) {
   const response = await axios.post(
-    `${process.env.REACT_APP_SERVER_IP}/login`,
+    `${config.REMOTE}/login`,
     {
       userId: id,
       password: pw,
+    },
+    {
+      withCredentials: true,
     }
   );
   saveToken(response.data.token);
+  return response.data;
+}
+
+export async function logoutSubmitState() {
+  const response = await axios.get(`${config.REMOTE}/logout`, {
+    withCredentials: true,
+  });
   return response.data;
 }
 
@@ -57,7 +71,7 @@ export const authCheckSelector = selector({
   get: async () => {
     const token = getToken();
     const response: any = await axios
-      .get(`${process.env.REACT_APP_SERVER_IP}/me`, {
+      .get(`${config.REMOTE}/me`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,

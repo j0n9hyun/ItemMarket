@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { atom, selector } from 'recoil';
+import { config } from '../../config';
 
 export const marketItemIdState = atom({
   key: 'marketItemIdState',
@@ -9,9 +10,7 @@ export const marketItemIdState = atom({
 export const challengesSelector = selector({
   key: 'challengesSelector',
   get: async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_IP}/market`
-    );
+    const response = await axios.get(`${config.REMOTE}/market`);
     return response.data;
   },
 });
@@ -23,16 +22,13 @@ export async function createArticle(
   price: number,
   url: string
 ) {
-  const response = await axios.post(
-    `${process.env.REACT_APP_SERVER_IP}/market`,
-    {
-      name: name,
-      title: title,
-      content: content,
-      price: price,
-      url: url,
-    }
-  );
+  const response = await axios.post(`${config.REMOTE}/market`, {
+    name: name,
+    title: title,
+    content: content,
+    price: price,
+    url: url,
+  });
 
   return response.data;
 }
