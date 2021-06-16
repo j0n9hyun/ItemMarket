@@ -9,11 +9,9 @@ const MarketArticle = () => {
   const { id } = useParams<{ id: string }>();
   const marketList = useRecoilValue(challengesSelector);
   const marketInfo = marketList
-    .filter((v: MarketListType) => v.id === parseInt(id))
+    .filter((v: MarketListType) => v.id === +id)
     .find((r: MarketListType) => r);
-  const marketOthers = marketList.filter(
-    (v: MarketListType) => v.id !== parseInt(id)
-  );
+  const marketOthers = marketList.filter((v: MarketListType) => v.id !== +id);
   const props = {
     marketInfo,
     marketOthers,

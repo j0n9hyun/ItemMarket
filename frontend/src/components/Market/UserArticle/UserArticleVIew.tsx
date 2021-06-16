@@ -1,12 +1,12 @@
 import { useHistory } from 'react-router';
-import { MarketList, MarketListType } from '../../types/marketTypes';
+import { MarketListType } from '../../types/marketTypes';
 
-const MarketItemsView = ({ marketList }: MarketList) => {
+const MarketItemsView = ({ marketUserInfo }: any) => {
   const history = useHistory();
   return (
     <section className='market-list'>
       <div className='market-items'>
-        {marketList.map(
+        {marketUserInfo.map(
           ({ id, title, content, url, price }: MarketListType) => (
             <article
               className='market-item'
