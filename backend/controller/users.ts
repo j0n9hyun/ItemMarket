@@ -60,7 +60,7 @@ export async function login(req: Request, res: Response) {
 }
 
 async function setToken(token: any, res: any) {
-  res.cookie('authToken', token, {
+  res.cookie('token', token, {
     expires: new Date(Date.now() + KR_TIME_DIFF + 150000),
     httpOnly: true,
     secure: true,
@@ -68,8 +68,7 @@ async function setToken(token: any, res: any) {
 }
 
 export async function logout(req: Request, res: Response) {
-  const { userId } = req.body;
-  await getRepository(User).update({ userId: userId }, { token: '' });
+  res.clearCookie('token');
   return res.sendStatus(200);
 }
 

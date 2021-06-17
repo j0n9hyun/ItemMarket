@@ -5,7 +5,7 @@ import logo from '../../static/img/jjong.png';
 import { loggedState, logoutSubmitState } from '../atoms/authState';
 const Header = () => {
   const history = useHistory();
-  const [isLogin, setIsLogin] = useRecoilState(loggedState);
+  const [isLogin] = useRecoilState(loggedState);
   const onClickLogo = () => {
     history.push('/');
   };
@@ -14,8 +14,6 @@ const Header = () => {
   };
   const onClickLogout = () => {
     logoutSubmitState();
-    setIsLogin(false);
-    clearToken();
     window.location.reload();
   };
   const onClickRegister = () => {

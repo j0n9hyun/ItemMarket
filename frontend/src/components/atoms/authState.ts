@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { atom, selector } from 'recoil';
 import { config } from '../../config';
-import { getToken, saveToken } from '../../db/token';
+import { getToken } from '../../db/token';
 
 export const formIdState = atom({
   key: 'formIdState',
@@ -55,7 +55,6 @@ export async function loginSubmitState(id: string, pw: string) {
       withCredentials: true,
     }
   );
-  saveToken(response.data.token);
   return response.data;
 }
 

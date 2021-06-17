@@ -28,16 +28,13 @@ const Login = () => {
   const onSubmit = (e: eventType) => {
     e.preventDefault();
     loginSubmitState(id, pw).then((res: any) => {
-      if (res.isAuth) {
-        window.location.reload();
-      } else {
-        window.location.reload();
-      }
+      res.isAuth ? window.location.reload() : window.location.reload();
     });
   };
 
   useEffect(() => {
-    setId(''); setPw('');
+    setId('');
+    setPw('');
   }, [setId, setPw]);
   const props = {
     onClickRegister,

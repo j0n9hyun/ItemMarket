@@ -3,13 +3,14 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const WriteView = ({
-  modules,
-  formats,
   onChangeTitle,
   onChangeContent,
   onClickWrite,
   quillRef,
 }: any) => {
+  const imageHandler = () => {
+    console.log('imageHandler');
+  };
   return (
     <div className='write-wrapper'>
       <div className='write-title'>글 작성하기</div>
@@ -26,12 +27,26 @@ const WriteView = ({
           width: '50%',
           margin: '30px auto 60px',
         }}
+        modules={{
+          toolbar: {
+            container: [
+              [{ header: [1, 2, 3, 4, 5, 6, false] }],
+              ['bold', 'italic', 'underline'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              [{ align: [] }],
+              ['link', 'image'],
+              ['clean'],
+              [{ color: [] }],
+            ],
+            handlers: {
+              image: imageHandler,
+            },
+          },
+        }}
         placeholder='내용을 입력해주세요'
         onChange={(content, delta, source, editor) =>
           onChangeContent(editor.getText())
         }
-        modules={modules}
-        formats={formats}
         ref={quillRef}
       />
       <div className='write-submit-wrapper'>
