@@ -4,11 +4,8 @@ import Footer from '../Home/Footer';
 import Header from '../Home/Header';
 import { MarketListType } from '../types/marketTypes';
 
-const MarketArticleView = ({ marketInfo, marketOthers }: any) => {
+const MarketArticleView = ({ marketInfo, marketOthers, onClickMore }: any) => {
   const history = useHistory();
-  const onClickMore = () => {
-    history.push('/market');
-  };
   return (
     <>
       <Helmet>
