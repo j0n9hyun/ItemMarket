@@ -26,7 +26,16 @@ const corsOptions = {
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+<<<<<<< HEAD
 app.use(cors(corsOptions));
+=======
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
+>>>>>>> feature-test
 app.use(helmet());
 app.use(cookieParser());
 app.use('/', usersRouter);

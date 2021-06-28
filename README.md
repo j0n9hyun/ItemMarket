@@ -1,4 +1,4 @@
-# Overview
+# Overview.
 
 ![](https://user-images.githubusercontent.com/16969364/119623236-ef7d0900-be42-11eb-87d9-a7cd4aa85ba5.png)
 디자인 초안

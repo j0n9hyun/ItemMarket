@@ -7,7 +7,10 @@ import { User } from '../entity/User';
 const AUTH_ERROR = { message: 'Authentication Error' };
 
 export const isAuth = async (req: any, res: Response, next: NextFunction) => {
+<<<<<<< HEAD
   let token;
+=======
+>>>>>>> feature-test
   const authHeader = req.get('Authorization');
   const userRepository = getRepository(User);
   if (!(authHeader && authHeader.startsWith('Bearer '))) {
