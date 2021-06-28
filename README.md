@@ -30,12 +30,12 @@
 ### BackeEnd
 - Node.js
 - Fastify
-- Mongoose
+- TypeORM
 
 ### DataBase
-- Mongodb
+- Mysql
  
-### Design
+### Design Draft
 - Figma
 
 # Contribution
