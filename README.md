@@ -5,9 +5,9 @@
 디자인 초안
 
 
+![](https://user-images.githubusercontent.com/16969364/124411289-338af400-dd87-11eb-838f-9499b38f8491.PNG)
 ![](https://user-images.githubusercontent.com/16969364/119771332-7e982880-bef8-11eb-8d26-7708d50883a1.png)
 ![](https://user-images.githubusercontent.com/16969364/119772487-337f1500-befa-11eb-8f55-630115836328.png)
-![](https://user-images.githubusercontent.com/16969364/124411289-338af400-dd87-11eb-838f-9499b38f8491.PNG)
 
 # Features
 
@@ -31,8 +31,11 @@
 
 ### BackeEnd
 
-- Node.js
+- Node.js(.ts)
+- Express
+- Validator
 - TypeORM
+- JWT
 
 ### DataBase
 
